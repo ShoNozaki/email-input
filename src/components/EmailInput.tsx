@@ -1,3 +1,4 @@
+import { constants } from 'os';
 import React, { useState } from 'react'
 import {data} from '../data'
 import './EmailInput.css'
@@ -10,7 +11,9 @@ const EmailInput = () => {
 	const [input, setInput] = useState("")
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInput(e.target.value)
+		const { value } = e.target 
+		const trimmed = value.trim()
+		setInput(trimmed)
 	}
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
