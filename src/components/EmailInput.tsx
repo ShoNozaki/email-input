@@ -21,16 +21,34 @@ const EmailInput = () => {
 			})
 	}, [])
 
+	const filterSuggestions = (value: string) => {
+		let newSuggestions = emails.filter(email => email.includes(value))
+		setSuggestions(newSuggestions)
+		console.log(suggestions)
+	}
+
+	const renderSuggestions = () => {
+		return (
+			<ul className="suggestions">
+				{suggestions.map((suggestion, i) => {
+					return(
+					<li>{suggestion}</li>
+					)
+				})}
+			</ul>
+		)	
+	}
+
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target 
 		const trimmed = value.trim()
 		setInput(trimmed)
+		filterSuggestions(value)
 	}
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		const { key } = e
 		if(key === "Enter" || key === "Tab"){
-			console.log("ADD TAG")
 			addTag()
 		}
 	}
@@ -67,6 +85,7 @@ const EmailInput = () => {
 			onChange={onChange}
 			onKeyDown={onKeyDown}
 			/>
+			{input.length?renderSuggestions():""}
 		</div>
 	)
 }
