@@ -7,11 +7,16 @@ import './EmailInput.css'
 
 const EmailInput = () => {
 	const [tags, setTags] = useState(["theresa@outlook.com", "erictaylor"]);
+	const [input, setInput] = useState("")
+
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInput(e.target.value)
+	}
 
 	const removeTag = (tagI: number) => {
 		setTags(prevTags => prevTags.filter((tag, i) => i !== tagI))
 	}
-
+  
 
 	return (
 		<div className="emailInput">
@@ -26,7 +31,11 @@ const EmailInput = () => {
 				</div>
 				)
 			})}
-			<input placeholder="Enter recipients..."></input>
+			<input 
+			placeholder="Enter recipients..."
+			value={input}
+			onChange={onChange}
+			/>
 		</div>
 	)
 }
