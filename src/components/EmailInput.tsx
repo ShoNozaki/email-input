@@ -13,6 +13,7 @@ const EmailInput = () => {
 	const [input, setInput] = useState("");
 
 	useEffect(() => {
+		//fetching on home for mock api call
 		fetch('/')
 			.then(() => {
 				setEmails(data)
