@@ -13,10 +13,17 @@ const EmailInput = () => {
 		setInput(e.target.value)
 	}
 
+	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		const { key } = e
+		console.log(key)
+	}
+
 	const addTag = () => {
 		if(input){
 			setTags([...tags, input])
+			setInput("")
 		}
+
 	}
 
 	const removeTag = (tagI: number) => {
@@ -41,6 +48,7 @@ const EmailInput = () => {
 			placeholder="Enter recipients..."
 			value={input}
 			onChange={onChange}
+			onKeyDown={onKeyDown}
 			/>
 		</div>
 	)
