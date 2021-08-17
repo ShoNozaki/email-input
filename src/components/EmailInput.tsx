@@ -1,5 +1,5 @@
 import { constants } from 'os';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {data} from '../data'
 import './EmailInput.css'
 
@@ -7,8 +7,18 @@ import './EmailInput.css'
 
 
 const EmailInput = () => {
+	const [emails, setEmails] = useState<string[]>([]);
+	const [suggestions, setSuggestions] = useState<string[]>([])
 	const [tags, setTags] = useState(["theresa@outlook.com", "erictaylor"]);
-	const [input, setInput] = useState("")
+	const [input, setInput] = useState("");
+
+	useEffect(() => {
+		fetch('/')
+			.then(() => {
+				setEmails(data)
+				setSuggestions(data)
+			})
+	}, [])
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target 
