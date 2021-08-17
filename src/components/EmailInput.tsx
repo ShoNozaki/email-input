@@ -15,7 +15,10 @@ const EmailInput = () => {
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		const { key } = e
-		console.log(key)
+		if(key === "Enter" || key === "Tab"){
+			console.log("ADD TAG")
+			addTag()
+		}
 	}
 
 	const addTag = () => {
