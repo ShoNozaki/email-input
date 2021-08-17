@@ -13,6 +13,12 @@ const EmailInput = () => {
 		setInput(e.target.value)
 	}
 
+	const addTag = () => {
+		if(input){
+			setTags([...tags, input])
+		}
+	}
+
 	const removeTag = (tagI: number) => {
 		setTags(prevTags => prevTags.filter((tag, i) => i !== tagI))
 	}
@@ -22,7 +28,7 @@ const EmailInput = () => {
 		<div className="emailInput">
 			{tags.map((tag, tagI) => {
 				return (
-				<div className="tag">
+				<div className="tag" key={tagI}>
 					<span>{tag}</span>
 					<button 
 					className="deleteButton"
