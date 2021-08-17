@@ -30,11 +30,12 @@ const EmailInput = () => {
 	const renderSuggestions = () => {
 		return (
 			<ul className="suggestions">
-				{suggestions.map((suggestion, i) => {
+				{suggestions.length?suggestions.map((suggestion, i) => {
 					return(
 					<li>{suggestion}</li>
 					)
-				})}
+				}):(<li>Email not found.</li>)
+			}
 			</ul>
 		)	
 	}
