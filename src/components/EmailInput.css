@@ -1,5 +1,6 @@
 .emailInput {
 	display: flex;
+	flex-wrap: wrap;
 
 	background: white;
 	width: 400px;
@@ -9,14 +10,22 @@
 }
 
 input {
-	border: none;
+	width: 100%;
+	min-width: 5rem;
 	padding: 5px 8px;
+	border: none;
 }
 
 .tag {
+	display: flex;
 	background: #ededed;
 	padding: 8px 5px;
 	border-radius: 6px;
+	cursor: arrow;
+}
+
+.tag:not(:first-of-type) {
+	margin-left: 5px;
 }
 
 .invalid {
