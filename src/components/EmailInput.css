@@ -13,13 +13,15 @@ input {
 	width: 100%;
 	min-width: 5rem;
 	padding: 5px 8px;
+
+	font-size: 1rem;
 	border: none;
 }
 
 .tag {
 	display: flex;
 	background: #ededed;
-	padding: 8px 5px;
+	padding: 5px 8px;
 	border-radius: 6px;
 	cursor: arrow;
 }
@@ -40,4 +42,23 @@ button {
 .invalid button {
 	background: #f1515f;
 	border-radius: 50%;
+}
+
+ul {
+	width: 100%;
+	height: 11rem;
+	margin: 0px;
+	padding: 0px;
+	font-size: 1rem;
+	list-style-type: none;
+	overflow-y: scroll;
+}
+
+ul li {
+	text-align: start;
+	padding: 5px 8px;
+}
+
+ul li:hover {
+	background: #eff5f9;
 }
