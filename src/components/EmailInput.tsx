@@ -74,11 +74,13 @@ const EmailInput = () => {
 	const editTag = (e:React.MouseEvent<HTMLDivElement, MouseEvent>, tagI: number) => {
 		const tag = e.target as HTMLElement
 		const text = tag.innerText
-		removeTag(tagI)
+		console.log(text)
 		setInput(text)
+		removeTag(e, tagI)
 	}
 
-	const removeTag = (tagI: number) => {
+	const removeTag = ( e: React.MouseEvent<HTMLButtonElement | HTMLDivElement, MouseEvent>, tagI: number) => {
+		e.stopPropagation()
 		setTags(prevTags => prevTags.filter((tag, i) => i !== tagI))
 	}
 
@@ -101,7 +103,7 @@ const EmailInput = () => {
 					<span>{tag}</span>
 					<button 
 					className="deleteButton"
-					onClick={() => removeTag(tagI)}
+					onClick={(e) => removeTag(e,tagI)}
 					>x</button>
 				</div>
 				)

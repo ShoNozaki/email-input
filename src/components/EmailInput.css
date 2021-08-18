@@ -54,12 +54,17 @@ button {
 	height: 0.8rem;
 
 	font-size: 0.8rem;
+	color: transparent;
 	margin-bottom: 0.15rem;
 	margin-left: 5px;
+}
+.tag:not(.invalid):hover button {
+	color: #000000;
 }
 
 .invalid button {
 	background: #f1515f;
+	color: black;
 	border-radius: 50%;
 }
 
