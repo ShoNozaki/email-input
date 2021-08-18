@@ -26,10 +26,13 @@ input:focus {
 	display: flex;
 	position: relative;
 	align-items: flex-end;
-	background: #ededed;
 	padding: 5px 8px;
 	border-radius: 6px;
 	cursor: arrow;
+}
+
+.tag:not(.invalid):hover {
+	background: #ededed;
 }
 
 .tag:not(:first-of-type) {
@@ -41,21 +44,23 @@ input:focus {
 }
 
 button {
-	margin-left: 5px;
-	border: none;
-}
-
-.invalid button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #f1515f;
+
+	background: transparent;
+	border: none;
 	width: 0.8rem;
 	height: 0.8rem;
 
 	font-size: 0.8rem;
-	border-radius: 50%;
 	margin-bottom: 0.15rem;
+	margin-left: 5px;
+}
+
+.invalid button {
+	background: #f1515f;
+	border-radius: 50%;
 }
 
 ul {
