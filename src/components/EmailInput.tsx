@@ -59,7 +59,7 @@ const EmailInput = () => {
 		setSuggestionChosen(false)
 	}
 
-	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+	const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		const { key } = e
 		if(key === "Enter" || key === "Tab"){
 			addTag()
@@ -114,7 +114,7 @@ const EmailInput = () => {
 			placeholder="Enter recipients..."
 			value={input}
 			onChange={onChange}
-			onKeyDown={onKeyDown}
+			onKeyUp={onKeyUp}
 			ref={inputRef}
 			/>
 			{input.length && !suggestionChosen?renderSuggestions():""}
