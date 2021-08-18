@@ -9,6 +9,7 @@ import './EmailInput.css'
 const EmailInput = () => {
 	const [emails, setEmails] = useState<string[]>([]);
 	const [suggestions, setSuggestions] = useState<string[]>([])
+	const [suggestionChosen, setSuggestionChosen] = useState(false)
 	const [tags, setTags] = useState(["theresa@outlook.com", "erictaylor"]);
 	const [input, setInput] = useState("");
 
@@ -31,6 +32,7 @@ const EmailInput = () => {
 		const suggestion = li.innerText
 		console.log(suggestion)
 		setInput(suggestion)
+		setSuggestionChosen(true)
 	}
 
 	const renderSuggestions = () => {
@@ -53,6 +55,7 @@ const EmailInput = () => {
 		const trimmed = value.trim()
 		setInput(trimmed)
 		filterSuggestions(value)
+		setSuggestionChosen(false)
 	}
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -73,7 +76,12 @@ const EmailInput = () => {
 	const removeTag = (tagI: number) => {
 		setTags(prevTags => prevTags.filter((tag, i) => i !== tagI))
 	}
-  
+
+	//used regex for validation from stackoverflow but would implement custom solution with backend check as well if in production.
+	const validateEmail = (email: string): boolean => {
+		const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/;
+    return re.test(String(email).toLowerCase());
+	}
 
 	return (
 		<div className="emailInput">
@@ -94,7 +102,7 @@ const EmailInput = () => {
 			onChange={onChange}
 			onKeyDown={onKeyDown}
 			/>
-			{input.length?renderSuggestions():""}
+			{input.length && !suggestionChosen?renderSuggestions():""}
 		</div>
 	)
 }
