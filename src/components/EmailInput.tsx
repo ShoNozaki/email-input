@@ -10,7 +10,7 @@ const EmailInput = () => {
 	const [emails, setEmails] = useState<string[]>([]);
 	const [suggestions, setSuggestions] = useState<string[]>([])
 	const [suggestionChosen, setSuggestionChosen] = useState(false)
-	const [tags, setTags] = useState(["theresa@outlook.com", "erictaylor"]);
+	const [tags, setTags] = useState<string[]>([]);
 	const [input, setInput] = useState("");
 
 	useEffect(() => {
@@ -86,8 +86,9 @@ const EmailInput = () => {
 	return (
 		<div className="emailInput">
 			{tags.map((tag, tagI) => {
+				const isValid = validateEmail(tag)
 				return (
-				<div className="tag" key={tagI}>
+				<div className={isValid?"tag": "tag invalid"} key={tagI}>
 					<span>{tag}</span>
 					<button 
 					className="deleteButton"
