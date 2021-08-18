@@ -70,7 +70,12 @@ const EmailInput = () => {
 			setTags([...tags, input])
 			setInput("")
 		}
-
+	}
+	const editTag = (e:React.MouseEvent<HTMLDivElement, MouseEvent>, tagI: number) => {
+		const tag = e.target as HTMLElement
+		const text = tag.innerText
+		removeTag(tagI)
+		setInput(text)
 	}
 
 	const removeTag = (tagI: number) => {
@@ -88,7 +93,11 @@ const EmailInput = () => {
 			{tags.map((tag, tagI) => {
 				const isValid = validateEmail(tag)
 				return (
-				<div className={isValid?"tag": "tag invalid"} key={tagI}>
+				<div 
+				className={isValid?"tag": "tag invalid"} 
+				key={tagI}
+				onClick={(e) => editTag(e, tagI)}
+				>
 					<span>{tag}</span>
 					<button 
 					className="deleteButton"
