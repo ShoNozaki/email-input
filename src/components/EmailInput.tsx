@@ -1,10 +1,7 @@
 import { constants } from 'os';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {data} from '../data'
 import './EmailInput.css'
-
-// console.log(data)
-
 
 const EmailInput = () => {
 	const [emails, setEmails] = useState<string[]>([]);
@@ -12,6 +9,10 @@ const EmailInput = () => {
 	const [suggestionChosen, setSuggestionChosen] = useState(false)
 	const [tags, setTags] = useState<string[]>([]);
 	const [input, setInput] = useState("");
+
+	//reference to easily set focus after events
+	const inputRef = useRef<HTMLInputElement>(null)
+
 
 	useEffect(() => {
 		//fetching on home for mock api call
@@ -30,9 +31,9 @@ const EmailInput = () => {
 	const handleSuggestionClick = (e:React.MouseEvent<HTMLLIElement, MouseEvent>) => {
 		const li = e.target as HTMLElement
 		const suggestion = li.innerText
-		console.log(suggestion)
 		setInput(suggestion)
 		setSuggestionChosen(true)
+		inputRef.current?.focus()
 	}
 
 	const renderSuggestions = () => {
@@ -69,12 +70,12 @@ const EmailInput = () => {
 		if(input){
 			setTags([...tags, input])
 			setInput("")
+			inputRef.current?.focus()
 		}
 	}
 	const editTag = (e:React.MouseEvent<HTMLDivElement, MouseEvent>, tagI: number) => {
 		const tag = e.target as HTMLElement
 		const text = tag.innerText
-		console.log(text)
 		setInput(text)
 		removeTag(e, tagI)
 	}
@@ -82,6 +83,7 @@ const EmailInput = () => {
 	const removeTag = ( e: React.MouseEvent<HTMLButtonElement | HTMLDivElement, MouseEvent>, tagI: number) => {
 		e.stopPropagation()
 		setTags(prevTags => prevTags.filter((tag, i) => i !== tagI))
+		inputRef.current?.focus()
 	}
 
 	//used regex for validation from stackoverflow but would implement custom solution with backend check as well if in production.
@@ -113,6 +115,7 @@ const EmailInput = () => {
 			value={input}
 			onChange={onChange}
 			onKeyDown={onKeyDown}
+			ref={inputRef}
 			/>
 			{input.length && !suggestionChosen?renderSuggestions():""}
 		</div>
