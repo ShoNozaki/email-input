@@ -24,7 +24,13 @@ const EmailInput = () => {
 	const filterSuggestions = (value: string) => {
 		let newSuggestions = emails.filter(email => email.includes(value))
 		setSuggestions(newSuggestions)
-		console.log(suggestions)
+	}
+
+	const handleSuggestionClick = (e:React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+		const li = e.target as HTMLElement
+		const suggestion = li.innerText
+		console.log(suggestion)
+		setInput(suggestion)
 	}
 
 	const renderSuggestions = () => {
@@ -32,7 +38,9 @@ const EmailInput = () => {
 			<ul className="suggestions">
 				{suggestions.length?suggestions.map((suggestion, i) => {
 					return(
-					<li>{suggestion}</li>
+					<li
+						onClick={handleSuggestionClick}
+					>{suggestion}</li>
 					)
 				}):(<li>Email not found.</li>)
 			}
